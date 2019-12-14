@@ -3,7 +3,20 @@ import React from "react";
 import { videoHeight, videoWidth, getCurrentPositions } from "./posenet";
 
 const Pose = () => {
-  const [pos, setPos] = React.useState({});
+  let [pos, setPos] = React.useState([]);
+  const [filter, setFilter] = React.useState(
+    "rightEye rightWrist leftEye leftWrist"
+  );
+  let filteredPos = [];
+  pos.forEach(_pos => {
+    let newFilteredPos = {};
+    if (filter && filter.split) {
+      filter.split(" ").forEach(field => (newFilteredPos[field] = _pos[field]));
+    } else {
+      newFilteredPos = pos;
+    }
+    filteredPos.push(newFilteredPos);
+  });
   React.useEffect(() => {
     const id = setInterval(() => {
       setPos(getCurrentPositions());
@@ -31,7 +44,7 @@ const Pose = () => {
         ></canvas>
       </div>
       <pre style={{ fontSize: "small", textAlign: "left" }}>
-        {JSON.stringify(pos, null, 2)}
+        {JSON.stringify(filteredPos, null, 2)}
       </pre>
     </>
   );

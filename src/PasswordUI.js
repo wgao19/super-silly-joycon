@@ -34,22 +34,28 @@ const PasswordUI = () => {
     }, 1000);
   }, []);
 
-  useEffect(() => {
-    subscribe("a", payload => {
-      if (payload === "pressed") {
-        const pose = getCurrentPositions();
-        const char = poseToChar(pose);
-        setValue(`${value}${char}`);
-      }
-    });
-    subscribe("y", payload => {
-      if (payload === "pressed") {
-        const pose = getCurrentPositions();
-        const char = poseToChar(pose);
-        setValue(`${value}${char}`);
-      }
-    });
-  }, [value]);
+  useEffect(
+    () =>
+      subscribe("a", payload => {
+        if (payload === "pressed") {
+          const pose = getCurrentPositions();
+          const char = poseToChar(pose);
+          setValue(`${value}${char}`);
+        }
+      }),
+    [value]
+  );
+  useEffect(
+    () =>
+      subscribe("y", payload => {
+        if (payload === "pressed") {
+          const pose = getCurrentPositions();
+          const char = poseToChar(pose);
+          setValue(`${value}${char}`);
+        }
+      }),
+    [value]
+  );
 
   const processed = requirements.map(r => {
     return { ...r, result: r.test(value) };
