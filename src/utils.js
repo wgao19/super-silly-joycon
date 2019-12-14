@@ -21,13 +21,17 @@ const bodyPartsAreClose = (a, b, distance = 10) => {
   return diffX < distance && diffY < distance;
 };
 
+const bodyPartsAreCloseToTheFloor = (sealevel, ...bodyParts) =>
+  !bodyParts.some(({ position: { y } }) => y < sealevel);
+
 export const matchPosition = (positions, predicate) => predicate(positions);
 
 export const cuddling = ([positions]) =>
-  bodyPartsAreClose(positions.leftWrist, positions.rightWrist, 100) &&
-  bodyPartsAreClose(positions.leftKnee, positions.rightKnee, 100) &&
-  bodyPartsAreClose(positions.leftWrist, positions.leftKnee, 100) &&
-  bodyPartsAreClose(positions.rightWrist, positions.rightKnee, 100);
+  bodyPartsAreCloseToTheFloor(
+    400,
+    positions.rightShoulder,
+    positions.leftShoulder
+  );
 
 export const raisedRightHand = ([positions]) =>
   positions.rightWrist.position.y < positions.rightShoulder.position.y;
@@ -44,3 +48,11 @@ export const shrugging = ([positions]) =>
 export const lotusPosition = ([positions]) =>
   bodyPartsAreClose(positions.leftWrist, positions.leftKnee, 100) &&
   bodyPartsAreClose(positions.rightWrist, positions.rightKnee, 100);
+
+export const standingStill = ([positions]) =>
+  bodyPartsAreCloseToTheFloor(400, positions.rightAnkle, positions.leftAnkle) &&
+  !bodyPartsAreCloseToTheFloor(
+    400,
+    positions.rightShoulder,
+    positions.leftShoulder
+  );

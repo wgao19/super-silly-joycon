@@ -9,7 +9,8 @@ import {
   facepalm,
   lotusPosition,
   raisedRightHand,
-  shrugging
+  shrugging,
+  standingStill
 } from "./utils";
 
 const gestures = [
@@ -40,7 +41,7 @@ const gestures = [
   {
     type: "gif",
     url: "https://i.imgur.com/HELVWiM.gif",
-    caption: "Cuddle on the floor and bury your face",
+    caption: "Cuddle on the floor",
     predicate: cuddling
   },
   {
@@ -63,7 +64,7 @@ const GestureUI = ({ onNext }) => {
           const pose = getCurrentPositions();
           if (matchPosition(pose, predicate)) {
             setResponse("🙆");
-            if (step + 1 < gestures.length - 1) {
+            if (step + 1 < gestures.length) {
               setStep(cur => (cur + 1) % gestures.length);
             } else {
               onNext(); // completed this gesture part
