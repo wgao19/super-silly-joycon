@@ -17,6 +17,12 @@ const buttonX = {
 const THRESHOLD = 300;
 
 const update = gamepad => {
+  // console.log("gamepad", gamepad);
+  gamepad.buttons.map((button, index) => {
+    if (buttonPressed(button)) {
+      console.log("pressed", index);
+    }
+  });
   // test button pressed
   const buttonDisplays = document.getElementsByClassName("button-display");
   for (let i = 0; i < buttonDisplays.length; i++) {
@@ -24,51 +30,51 @@ const update = gamepad => {
       i
     ].innerHTML = `pressed button ${i}: ${gamepad.buttons[i].pressed}`;
   }
-  const pressedX = gamepad.buttons[1].pressed;
-  const currentState = buttonX.state;
-  if (pressedX) {
-    switch (currentState) {
-      case "not pressed":
-      case "released": {
-        // change from not pressed to pressed and update timestamp
-        buttonX.state = "pressed";
-        buttonX.recentlyUpdated = +new Date();
-        break;
-      }
-      case "pressed": {
-        // already pressed, do not change unless it's passed threashold
-        if (+new Date() - buttonX.recentlyUpdated > THRESHOLD) {
-          buttonX.state = "hold";
-        }
-        break;
-      }
-      case "hold": // hold + pressed, still hold, do nothing
-      default: {
-        // do nothing
-      }
-    }
-  } else {
-    // new case is not pressed
-    switch (buttonX.state) {
-      case "pressed":
-      case "hold": {
-        buttonX.state = "released";
-        buttonX.recentlyUpdated = +new Date();
-        break;
-      }
-      case "released": {
-        if (+new Date() - buttonX.recentlyUpdated > THRESHOLD) {
-          buttonX.state = "not pressed";
-        }
-        break;
-      }
-      case "not pressed":
-      default: {
-        // do nothing
-      }
-    }
-  }
-  document.getElementById("button-x-display").innerHTML = buttonX.state;
+  // const pressedX = gamepad.buttons[1].pressed;
+  // const currentState = buttonX.state;
+  // if (pressedX) {
+  //   switch (currentState) {
+  //     case "not pressed":
+  //     case "released": {
+  //       // change from not pressed to pressed and update timestamp
+  //       buttonX.state = "pressed";
+  //       buttonX.recentlyUpdated = +new Date();
+  //       break;
+  //     }
+  //     case "pressed": {
+  //       // already pressed, do not change unless it's passed threashold
+  //       if (+new Date() - buttonX.recentlyUpdated > THRESHOLD) {
+  //         buttonX.state = "hold";
+  //       }
+  //       break;
+  //     }
+  //     case "hold": // hold + pressed, still hold, do nothing
+  //     default: {
+  //       // do nothing
+  //     }
+  //   }
+  // } else {
+  //   // new case is not pressed
+  //   switch (buttonX.state) {
+  //     case "pressed":
+  //     case "hold": {
+  //       buttonX.state = "released";
+  //       buttonX.recentlyUpdated = +new Date();
+  //       break;
+  //     }
+  //     case "released": {
+  //       if (+new Date() - buttonX.recentlyUpdated > THRESHOLD) {
+  //         buttonX.state = "not pressed";
+  //       }
+  //       break;
+  //     }
+  //     case "not pressed":
+  //     default: {
+  //       // do nothing
+  //     }
+  //   }
+  // }
+  // document.getElementById("button-x-display").innerHTML = buttonX.state;
 };
 
 const gameLoop = () => {
