@@ -24,3 +24,14 @@ export const cuddling = ([positions]) =>
 
 export const raisedRightHand = ([positions]) =>
   positions.rightWrist.position.y < positions.rightShoulder.position.y;
+
+export const facepalm = ([positions]) => {
+  const diffX = Math.abs(
+    positions.rightWrist.position.x - positions.rightEye.position.x
+  );
+  const diffY = Math.abs(
+    positions.rightWrist.position.y - positions.rightEye.position.y
+  );
+
+  return diffX < 150 && diffY < 150;
+};
