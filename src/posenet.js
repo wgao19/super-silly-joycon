@@ -7,16 +7,11 @@ let nextPositions = [];
 let colorLeft = "red";
 let colorRight = "green";
 
-let video;
-
 export function getCurrentPositions() {
-  if (video === undefined) {
-    lskdj();
-  }
   return currentPositions;
 }
 
-async function lskdj() {
+(async function lskdj() {
   // We create an object with the parameters that we want for the model.
   const poseNetState = {
     algorithm: "single-pose",
@@ -45,6 +40,8 @@ async function lskdj() {
     multiplier: poseNetState.input.multiplier,
     quantBytes: poseNetState.input.quantBytes
   });
+
+  let video;
 
   try {
     video = await setupCamera();
@@ -124,7 +121,7 @@ async function lskdj() {
 
     poseDetectionFrame();
   }
-}
+})();
 
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   let newPosition = {};
