@@ -139,14 +139,15 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
     const { y, x } = rightWrist.position;
     drawPoint(ctx, y * scale, x * scale, 20, colorRight);
   }
-  drawFace("leftEye");
-  drawFace("rightEye");
+  drawFace("leftEar");
+  drawFace("rightEar");
   drawFace("nose");
   drawFace("leftShoulder");
   drawFace("rightShoulder");
   drawFace("leftKnee");
   drawFace("rightKnee");
   function drawFace(str) {
+    if (newPosition[str].score < minConfidence / 2) return;
     let pos = newPosition[str].position;
     drawPoint(ctx, pos.y * scale, pos.x * scale, 10, "cyan");
   }

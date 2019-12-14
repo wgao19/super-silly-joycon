@@ -6,9 +6,10 @@ import {
   matchPosition,
   poseToChar,
   cuddling,
+  facepalm,
+  lotusPosition
   raisedRightHand,
   shrugging,
-  lotusPosition
 } from "./utils";
 
 const gestures = [
@@ -25,6 +26,12 @@ const gestures = [
     predicate: shrugging
   },
   {
+    type: "emoji",
+    label: "🤦‍♀️",
+    caption: "Face + palm = BFFs",
+    predicate: facepalm
+  },
+  {
     type: "gif",
     url: "https://i.imgur.com/HELVWiM.gif",
     caption: "Cuddle on the floor",
@@ -39,7 +46,7 @@ const gestures = [
 ];
 
 const GestureUI = () => {
-  const [step, setStep] = React.useState(3);
+  const [step, setStep] = React.useState(0);
   const [response, setResponse] = React.useState("");
 
   const { type, label, caption, url, predicate } = gestures[step];
