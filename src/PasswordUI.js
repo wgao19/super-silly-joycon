@@ -3,23 +3,16 @@ import React, { useState } from "react";
 const requirements = [
   {
     name: "This is required",
-    test: password => {
-      if (password.length === 0) {
-        return false;
-      }
-
-      return true;
-    }
+    test: password => password.length > 0
   },
   {
     name: "Must have a number",
-    test: password => {
-      if (password.split("").some(x => "0123456789".split("").includes(x))) {
-        return true;
-      }
-
-      return false;
-    }
+    test: password =>
+      password.split("").some(x => "0123456789".split("").includes(x))
+  },
+  {
+    name: "Put up both your hands",
+    test: password => password.split("").includes("🙌")
   }
 ];
 
@@ -36,8 +29,8 @@ const PasswordUI = () => {
         type="text"
         value={value}
       />
-      {processed.map(p => (
-        <p>
+      {processed.map((p, index) => (
+        <p key={index}>
           {p.result ? "✅" : "❌"}
           {p.name}
         </p>
