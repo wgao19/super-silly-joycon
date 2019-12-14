@@ -139,8 +139,8 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
     const { y, x } = rightWrist.position;
     drawPoint(ctx, y * scale, x * scale, 20, colorRight);
   }
-  drawFace("leftEar");
-  drawFace("rightEar");
+  drawFace("leftEye");
+  drawFace("rightEye");
   drawFace("nose");
   drawFace("leftShoulder");
   drawFace("rightShoulder");

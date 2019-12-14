@@ -22,25 +22,33 @@ const JoyConController = () => {
 
   const onStageDone = () => setStage(stage + 1);
 
-  const startTime = useRef(Date.now());
+  const startTime = useRef(null);
   const [time, setTime] = useState(["00", "00"]);
 
-  const winLiao = stage === 2;
+  let startLiao = stage > 0;
+  let winLiao = stage === 2;
   useEffect(() => {
-    setInterval(() => {
+    const id = setInterval(() => {
+      if (!startLiao) return;
+      if (!startTime.current) startTime.current = Date.now();
       const diff = Date.now() - startTime.current;
       const totalSeconds = Math.floor(diff / 1000);
       const minutes = Math.floor(totalSeconds / 60);
       const seconds = totalSeconds - minutes * 60;
-      if (winLiao) {
-        // stop updating when win liao
-        setTime([
+      if (startLiao && !winLiao) {
+        // only update time when havent win yet
+        const newtime = [
           minutes > 9 ? `${minutes}` : `0${minutes}`,
           seconds > 9 ? `${seconds}` : `0${seconds}`
-        ]);
+        ];
+        console.log({ newtime });
+        setTime(newtime);
+      } else {
+        setTime(time);
       }
     }, 1000);
-  }, []);
+    return () => clearInterval(id);
+  }, [startLiao, winLiao]);
 
   return (
     <div>
