@@ -12,23 +12,35 @@ const requirements = [
   },
   {
     name: "Put up both your hands",
-    test: password => password.split("").includes("🙌")
+    test: password => [...password].includes("🙌")
   }
 ];
 
 const PasswordUI = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [value, setValue] = useState("");
   const processed = requirements.map(r => {
     return { ...r, result: r.test(value) };
   });
   return (
     <form>
-      <input
-        className="password-input"
-        onChange={event => setValue(event.currentTarget.value)}
-        type="text"
-        value={value}
-      />
+      <div className="input-wrapper">
+        <input
+          className="input"
+          onChange={event => setValue(event.currentTarget.value)}
+          type={showPassword ? "text" : "password"}
+          value={value}
+        />
+        <button
+          className="show-password"
+          onClick={() => {
+            setShowPassword(!showPassword);
+          }}
+          type="button"
+        >
+          {showPassword ? "🙈" : "👀"}
+        </button>
+      </div>
       {processed.map((p, index) => (
         <p key={index}>
           {p.result ? "✅" : "❌"}

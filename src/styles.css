@@ -266,7 +266,26 @@ body {
   }
 }
 
-.password-input {
-  border: solid 5px black;
+.input-wrapper {
+  border: solid 2px #333;
   border-radius: 4px;
+  width: 50%;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.input {
+  font-size: 18px;
+  padding: 8px 16px;
+  width: calc(100% - 40px);
+  border: none;
+  box-sizing: border-box;
+}
+
+.show-password {
+  display: inline-block;
+  border: none;
+  margin-right: 8px;
+  background: transparent;
+  font-size: 16px;
 }
