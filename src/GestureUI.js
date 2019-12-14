@@ -40,8 +40,8 @@ const gestures = [
   {
     type: "gif",
     url: "https://i.imgur.com/HELVWiM.gif",
-    caption: "Cuddle on the floor",
-    predicate: cuddling
+    caption: "Cuddle on the floor and bury your face",
+    predicate: facepalm
   }
 ];
 
