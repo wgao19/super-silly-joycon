@@ -22,7 +22,9 @@ export const matchPosition = (positions, predicate) => predicate(positions);
 
 export const cuddling = ([positions]) =>
   bodyPartsAreClose(positions.leftWrist, positions.rightWrist) &&
-  positions.leftWrist.position.y < 250;
+  bodyPartsAreClose(positions.leftKnee, positions.rightKnee) &&
+  bodyPartsAreClose(positions.leftWrist, positions.leftKnee) &&
+  bodyPartsAreClose(positions.rightWrist, positions.rightKnee);
 
 export const raisedRightHand = ([positions]) =>
   positions.rightWrist.position.y < positions.rightShoulder.position.y;
