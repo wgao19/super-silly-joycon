@@ -1,15 +1,11 @@
 const subscribers = {};
 
 export function dispatch(channel, payload) {
-    ...[widgetId, type, payload].filter(Boolean)
-  );
-  (subscribers[channel] || []).forEach(listener => listener(payload_));
+  console.log("dispatched", channel, payload);
+  (subscribers[channel] || []).forEach(listener => listener(payload));
 }
 
-export function subscribe(
-  channel,
-  listener
-) {
+export function subscribe(channel, listener) {
   if (subscribers[channel] && subscribers[channel].includes(listener)) {
     return () => {};
   }
