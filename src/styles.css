@@ -265,3 +265,8 @@ body {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.password-input {
+  border: solid 5px black;
+  border-radius: 4px;
+}
