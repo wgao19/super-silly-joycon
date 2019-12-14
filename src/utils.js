@@ -9,6 +9,8 @@ export const poseToChar = positions => {
   return "🙅";
 };
 
+const beneath = (positionA, positionB) => positionA.y > positionB.y;
+
 const bodyPartsAreClose = (a, b) => {
   const diffX = Math.abs(a.position.x - b.position.x);
   const diffY = Math.abs(a.position.y - b.position.y);
@@ -24,3 +26,9 @@ export const cuddling = ([positions]) =>
 
 export const raisedRightHand = ([positions]) =>
   positions.rightWrist.position.y < positions.rightShoulder.position.y;
+
+export const shrugging = ([positions]) =>
+  beneath(positions.rightElbow.position, positions.rightShoulder.position) &&
+  beneath(positions.rightShoulder.position, positions.rightWrist.position) &&
+  beneath(positions.leftElbow.position, positions.leftShoulder.position) &&
+  beneath(positions.leftShoulder.position, positions.leftWrist.position);

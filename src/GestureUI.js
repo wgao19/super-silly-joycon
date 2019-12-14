@@ -2,7 +2,13 @@ import * as React from "react";
 
 import { subscribe } from "./eventBus";
 import { getCurrentPositions } from "./posenet";
-import { matchPosition, poseToChar, cuddling, raisedRightHand } from "./utils";
+import {
+  matchPosition,
+  poseToChar,
+  cuddling,
+  raisedRightHand,
+  shrugging
+} from "./utils";
 
 const gestures = [
   {
@@ -14,8 +20,8 @@ const gestures = [
   {
     type: "emoji",
     label: "🤷🏻‍♀️",
-    caption: "Shrug???",
-    predicate: cuddling
+    caption: "Show your attitude ¯\\_(ツ)_/¯",
+    predicate: shrugging
   },
   {
     type: "gif",
