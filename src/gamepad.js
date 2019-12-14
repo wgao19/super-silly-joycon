@@ -121,7 +121,7 @@ export const gamepadConnect = evt => {
     }))
   });
   console.log("connected game pads:", connectedGamepads);
-  renderConnectedGamepadInfo();
+  // renderConnectedGamepadInfo();
   if (!start) {
     start = requestAnimationFrame(gameLoop);
   }
@@ -133,7 +133,7 @@ export const gamepadDisconnect = evt => {
   connectedGamepads = connectedGamepads.filter(
     gamepad => gamepad !== evt.gamepad
   );
-  renderConnectedGamepadInfo();
+  // renderConnectedGamepadInfo();
   if (!!start && connectedGamepads.length === 0) {
     cancelAnimationFrame(start);
     start = undefined;
