@@ -55,10 +55,10 @@ const JoyConController = () => {
       <h2 style={{ color: winLiao && "lightgreen" }}>
         Time {`${time[0]}:${time[1]}`}
       </h2>
-      {stage === 0 && <Welcome onNext={onStageDone} />}
-      {stage === 1 && <GestureUI onNext={onStageDone} />}
+      {!startLiao && <Welcome onNext={onStageDone} />}
+      {startLiao && !winLiao && <GestureUI onNext={onStageDone} />}
       {winLiao && <EndUI time={time} />}
-      <Pose />
+      {!winLiao && <Pose />}
     </div>
   );
 };
