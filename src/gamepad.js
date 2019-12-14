@@ -38,20 +38,14 @@ const update = (gamepad, buttonObservers) => {
           // change from not pressed to pressed and update timestamp
           buttonObserver.state = "pressed";
           buttonObserver.recentlyUpdated = +new Date();
-          dispatch("simple-button-gesture", {
-            label: buttonObserver.label,
-            state: buttonObserver.state
-          });
+          dispatch(buttonObserver.label, buttonObserver.state);
           break;
         }
         case "pressed": {
           // already pressed, do not change unless it's passed threashold
           if (+new Date() - buttonObserver.recentlyUpdated > THRESHOLD) {
             buttonObserver.state = "hold";
-            dispatch("simple-button-gesture", {
-              label: buttonObserver.label,
-              state: buttonObserver.state
-            });
+            dispatch(buttonObserver.label, buttonObserver.state);
           }
           break;
         }
@@ -66,28 +60,19 @@ const update = (gamepad, buttonObservers) => {
         case "pressed": {
           buttonObserver.state = "not pressed";
           buttonObserver.recentlyUpdated = +new Date();
-          dispatch("simple-button-gesture", {
-            label: buttonObserver.label,
-            state: buttonObserver.state
-          });
+          dispatch(buttonObserver.label, buttonObserver.state);
           break;
         }
         case "hold": {
           buttonObserver.state = "released";
           buttonObserver.recentlyUpdated = +new Date();
-          dispatch("simple-button-gesture", {
-            label: buttonObserver.label,
-            state: buttonObserver.state
-          });
+          dispatch(buttonObserver.label, buttonObserver.state);
           break;
         }
         case "released": {
           if (+new Date() - buttonObserver.recentlyUpdated > THRESHOLD) {
             buttonObserver.state = "not pressed";
-            dispatch("simple-button-gesture", {
-              label: buttonObserver.label,
-              state: buttonObserver.state
-            });
+            dispatch(buttonObserver.label, buttonObserver.state);
           }
           break;
         }
