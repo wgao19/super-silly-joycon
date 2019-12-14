@@ -109,6 +109,7 @@ export function getCurrentPositions() {
         }
       });
       currentPositions = nextPositions; // atomic swap
+      nextPositions = [];
       requestAnimationFrame(poseDetectionFrame);
     }
 
@@ -139,7 +140,7 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   drawFace("rightShoulder");
   function drawFace(str) {
     let pos = newPosition[str].position;
-    drawPoint(ctx, pos.y * scale, pos.x * scale, 20, "cyan");
+    drawPoint(ctx, pos.y * scale, pos.x * scale, 10, "cyan");
   }
 }
 
