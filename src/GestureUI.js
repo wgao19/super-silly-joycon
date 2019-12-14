@@ -7,9 +7,9 @@ import {
   poseToChar,
   cuddling,
   facepalm,
-  lotusPosition
+  lotusPosition,
   raisedRightHand,
-  shrugging,
+  shrugging
 } from "./utils";
 
 const gestures = [
