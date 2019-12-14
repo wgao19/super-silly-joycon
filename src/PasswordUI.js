@@ -17,7 +17,7 @@ const requirements = [
 
 const PasswordUI = () => {
   const startTime = useRef(Date.now());
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
   const [value, setValue] = useState("");
   const [time, setTime] = useState(["00", "00"]);
 
@@ -43,7 +43,6 @@ const PasswordUI = () => {
       }
     });
     subscribe("y", payload => {
-      console.log(payload);
       if (payload === "pressed") {
         const pose = getCurrentPositions();
         const char = poseToChar(pose);
