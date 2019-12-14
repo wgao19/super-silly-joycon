@@ -29,14 +29,6 @@ const buttonLabels = [
 const THRESHOLD = 400;
 
 const update = (gamepad, buttonObservers) => {
-  // test button pressed
-  const buttonDisplays = document.getElementsByClassName("button-display");
-  for (let i = 0; i < buttonDisplays.length; i++) {
-    buttonDisplays[
-      i
-    ].innerHTML = `pressed button ${i}: ${gamepad.buttons[i].pressed}`;
-  }
-
   buttonObservers.map(buttonObserver => {
     const pressed = gamepad.buttons[buttonObserver.index].pressed;
     if (pressed) {
