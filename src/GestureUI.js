@@ -48,7 +48,7 @@ const gestures = [
     type: "gif",
     url: "https://i.imgur.com/6hcqc5a.gif",
     caption: "Try hard to stand still",
-    predicate: () => true
+    predicate: standingStill
   }
 ];
 
