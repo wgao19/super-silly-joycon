@@ -266,7 +266,63 @@ body {
   }
 }
 
-.password-input {
-  border: solid 5px black;
-  border-radius: 4px;
+/**
+Password UI
+*/
+
+.password-container {
+  display: flex;
 }
+
+.password-container form {
+  flex: 1 0 50%;
+  margin-right: 24px;
+  margin-top: 16px;
+}
+
+.input-wrapper {
+  border: solid 2px #333;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  font-size: 18px;
+  padding: 8px 16px;
+  border: none;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.show-password {
+  display: inline-block;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+}
+
+ .am-i-wrong {
+   text-align: left;
+ }
+
+ .requirement-icon {
+   margin-right: 8px;
+ }
+
+ .hit-me {
+   width: 100%;
+   background: #333;
+   color: white;
+   font-size: 18px;
+   border-radius: 4px;
+   border: none;
+   margin-top: 16px;
+   padding: 8px 16px;
+   cursor: pointer;
+ }
+
+ .hit-me:disabled {
+   opacity: 0.5;
+   cursor: not-allowed;
+ }
