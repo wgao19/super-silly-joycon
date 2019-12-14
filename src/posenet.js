@@ -4,10 +4,16 @@ export let videoHeight = (window.innerHeight / 3) * 2;
 export let videoWidth = (window.innerWidth / 3) * 2;
 export let currentPositions = {};
 
+let video;
+
 export function getCurrentPositions() {
+  if (video === undefined) {
+    lskdj();
+  }
   return currentPositions;
 }
-(async function lskdj() {
+
+async function lskdj() {
   let colorLeft = "red";
   let colorRight = "green";
   // We create an object with the parameters that we want for the model.
@@ -38,8 +44,6 @@ export function getCurrentPositions() {
     multiplier: poseNetState.input.multiplier,
     quantBytes: poseNetState.input.quantBytes
   });
-
-  let video;
 
   try {
     video = await setupCamera();
@@ -139,4 +143,4 @@ export function getCurrentPositions() {
     ctx.fillStyle = color;
     ctx.fill();
   }
-})();
+}
