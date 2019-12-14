@@ -45,7 +45,6 @@ const JoyConController = () => {
       {stage === 0 && <Welcome onNext={onStage0Done} />}
       {stage === 1 && <GestureUI />}
       <Pose />
-      <div className="display" id="gamepad-display" />
     </div>
   );
 };

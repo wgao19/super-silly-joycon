@@ -9,6 +9,7 @@ import {
   facepalm,
   lotusPosition
   raisedRightHand,
+  shrugging,
 } from "./utils";
 
 const gestures = [
@@ -21,8 +22,8 @@ const gestures = [
   {
     type: "emoji",
     label: "🤷🏻‍♀️",
-    caption: "Shrug???",
-    predicate: cuddling
+    caption: "Show your attitude ¯\\_(ツ)_/¯",
+    predicate: shrugging
   },
   {
     type: "emoji",

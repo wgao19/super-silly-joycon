@@ -9,6 +9,8 @@ export const poseToChar = positions => {
   return "🙅";
 };
 
+const beneath = (positionA, positionB) => positionA.y > positionB.y;
+
 const bodyPartsAreClose = (a, b, distance = 10) => {
   const diffX = Math.abs(a.position.x - b.position.x);
   const diffY = Math.abs(a.position.y - b.position.y);
@@ -25,16 +27,14 @@ export const cuddling = ([positions]) =>
 export const raisedRightHand = ([positions]) =>
   positions.rightWrist.position.y < positions.rightShoulder.position.y;
 
-export const facepalm = ([positions]) => {
-  const diffX = Math.abs(
-    positions.rightWrist.position.x - positions.rightEye.position.x
-  );
-  const diffY = Math.abs(
-    positions.rightWrist.position.y - positions.rightEye.position.y
-  );
+export const facepalm = ([positions]) =>
+  bodyPartsAreClose(positions.rightWrist, positions.rightEye, 150);
 
-  return diffX < 150 && diffY < 150;
-};
+export const shrugging = ([positions]) =>
+  beneath(positions.rightElbow.position, positions.rightShoulder.position) &&
+  beneath(positions.rightShoulder.position, positions.rightWrist.position) &&
+  beneath(positions.leftElbow.position, positions.leftShoulder.position) &&
+  beneath(positions.leftShoulder.position, positions.leftWrist.position);
 
 export const lotusPosition = ([positions]) =>
   bodyPartsAreClose(positions.leftWrist, positions.leftKnee, 100) &&
