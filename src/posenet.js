@@ -89,8 +89,8 @@ export function getCurrentPositions() {
 
       const pose = await poseNetModel.estimatePoses(video, {
         flipHorizontal: flipPoseHorizontal,
-        // decodingMethod: "single-person"
-        decodingMethod: "multi-person"
+        decodingMethod: "single-person"
+        // decodingMethod: "multi-person"
         // maxDetections: guiState.multiPoseDetection.maxPoseDetections,
         // scoreThreshold: guiState.multiPoseDetection.minPartConfidence,
         // nmsRadius: guiState.multiPoseDetection.nmsRadius
