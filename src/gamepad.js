@@ -16,6 +16,17 @@ const buttonX = {
 
 const THRESHOLD = 300;
 
+const poseFields = [
+  "angularAcceleration",
+  "angularVelocity",
+  "hasOrientation",
+  "hasPosition",
+  "linearAcceleration",
+  "linearVelocity",
+  "orientation",
+  "position"
+];
+
 const update = gamepad => {
   // console.log("gamepad", gamepad);
   gamepad.buttons.map((button, index) => {
@@ -30,6 +41,13 @@ const update = gamepad => {
       i
     ].innerHTML = `pressed button ${i}: ${gamepad.buttons[i].pressed}`;
   }
+
+  poseFields.map(poseField => {
+    document.getElementById(
+      poseField
+    ).innerHTML = `${poseField}: ${gamepad.pose[poseField]}`;
+  });
+  console.log(gamepad.pose);
   // const pressedX = gamepad.buttons[1].pressed;
   // const currentState = buttonX.state;
   // if (pressedX) {
