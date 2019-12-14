@@ -1,5 +1,8 @@
 export const poseToChar = positions => {
-  if (bodyPartsAreClose(positions.leftWrist, positions.rightWrist)) {
+  if (
+    bodyPartsAreClose(positions.leftWrist, positions.rightWrist) &&
+    positions.leftWrist.position.y < 250
+  ) {
     return "🙆";
   }
 
