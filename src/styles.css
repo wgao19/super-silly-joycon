@@ -326,3 +326,7 @@ Password UI
    opacity: 0.5;
    cursor: not-allowed;
  }
+
+ .hit-me:not(:disabled):hover {
+   transform: translate(2px, 2px);
+ }
