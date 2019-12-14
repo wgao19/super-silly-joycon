@@ -7,7 +7,8 @@ import {
   poseToChar,
   cuddling,
   raisedRightHand,
-  shrugging
+  shrugging,
+  lotusPosition
 } from "./utils";
 
 const gestures = [
@@ -28,11 +29,17 @@ const gestures = [
     url: "https://i.imgur.com/HELVWiM.gif",
     caption: "Cuddle on the floor",
     predicate: cuddling
+  },
+  {
+    type: "emoji",
+    label: "🧘🏾‍♂️",
+    caption: "Meditate on the meaning of life",
+    predicate: lotusPosition
   }
 ];
 
 const GestureUI = () => {
-  const [step, setStep] = React.useState(0);
+  const [step, setStep] = React.useState(3);
   const [response, setResponse] = React.useState("");
 
   const { type, label, caption, url, predicate } = gestures[step];
