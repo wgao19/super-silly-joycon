@@ -42,12 +42,6 @@ const update = gamepad => {
     ].innerHTML = `pressed button ${i}: ${gamepad.buttons[i].pressed}`;
   }
 
-  poseFields.map(poseField => {
-    document.getElementById(
-      poseField
-    ).innerHTML = `${poseField}: ${gamepad.pose[poseField]}`;
-  });
-  console.log(gamepad.pose);
   // const pressedX = gamepad.buttons[1].pressed;
   // const currentState = buttonX.state;
   // if (pressedX) {
@@ -142,7 +136,7 @@ export const gamepadDisconnect = evt => {
   );
   renderConnectedGamepadInfo();
   if (!!start && connectedGamepads.length === 0) {
-    cancelAnimationFrame(gameLoop);
+    cancelAnimationFrame(start);
     start = undefined;
   }
 };

@@ -26,17 +26,6 @@ const JoyConController = () => {
       {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(idx => (
         <div className="button-display" data-button={idx} />
       ))}
-      {/**
-       *
-       */}
-      <div id="angularAcceleration" />
-      <div id="angularVelocity" />
-      <div id="hasOrientation" />
-      <div id="hasPosition" />
-      <div id="linearAcceleration" />
-      <div id="linearVelocity" />
-      <div id="orientation" />
-      <div id="position" />
     </div>
   );
 };
