@@ -2,6 +2,11 @@
 
 export let videoHeight = (window.innerHeight / 3) * 2;
 export let videoWidth = (window.innerWidth / 3) * 2;
+export let currentPositions = {};
+
+export function getCurrentPositions() {
+  return currentPositions;
+}
 (async function lskdj() {
   let colorLeft = "red";
   let colorRight = "green";
@@ -39,9 +44,6 @@ export let videoWidth = (window.innerWidth / 3) * 2;
   try {
     video = await setupCamera();
     video.play();
-    // const { width, height } = videoDimensions(video);
-    // videoHeight = height;
-    // videoWidth = width;
     detectPoseInRealTime(video);
   } catch (e) {
     throw e;
@@ -114,10 +116,11 @@ export let videoWidth = (window.innerWidth / 3) * 2;
 
     poseDetectionFrame();
   }
-
   function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
-    let leftWrist = keypoints.find(point => point.part === "leftWrist");
-    let rightWrist = keypoints.find(point => point.part === "rightWrist");
+    currentPositions = {};
+    keypoints.forEach(kp => (currentPositions[kp.part] = kp));
+    let leftWrist = currentPositions.leftWrist;
+    let rightWrist = currentPositions.rightWrist;
 
     if (leftWrist.score > minConfidence) {
       const { y, x } = leftWrist.position;
@@ -137,21 +140,3 @@ export let videoWidth = (window.innerWidth / 3) * 2;
     ctx.fill();
   }
 })();
-
-function videoDimensions(video) {
-  // Ratio of the video's intrisic dimensions
-  var videoRatio = video.videoWidth / video.videoHeight;
-  // The width and height of the video element
-  var width = video.offsetWidth,
-    height = video.offsetHeight;
-  // The ratio of the element's width to its height
-  var elementRatio = width / height;
-  // If the video element is short and wide
-  if (elementRatio > videoRatio) width = height * videoRatio;
-  // It must be tall and thin, or exactly equal to the original ratio
-  else height = width / videoRatio;
-  return {
-    width: width,
-    height: height
-  };
-}

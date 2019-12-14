@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { gamepadConnect, gamepadDisconnect } from "./gamepad";
 // import NintendoUI from "./NintendoUI";
 import PasswordUI from "./PasswordUI";
-import { videoHeight, videoWidth } from "./posenet";
+import { videoHeight, videoWidth, getCurrentPositions } from "./posenet";
 import "./styles.css";
 
 const JoyConController = () => {
@@ -17,6 +17,13 @@ const JoyConController = () => {
       window.removeEventListener("gamepaddisconnected", gamepadDisconnect);
     };
   }, []);
+  const [pos, setPos] = React.useState({});
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      setPos(getCurrentPositions());
+    }, 1000);
+    return () => clearInterval(id);
+  });
   return (
     <div>
       <div className="display" id="gamepad-display" />
@@ -40,6 +47,9 @@ const JoyConController = () => {
           }}
         ></canvas>
       </div>
+      <pre style={{ fontSize: "small", textAlign: "left" }}>
+        {JSON.stringify(pos, null, 2)}
+      </pre>
     </div>
   );
 };
