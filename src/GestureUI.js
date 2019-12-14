@@ -45,7 +45,7 @@ const gestures = [
   }
 ];
 
-const GestureUI = () => {
+const GestureUI = ({ onNext }) => {
   const [step, setStep] = React.useState(0);
   const [response, setResponse] = React.useState("");
 
@@ -57,13 +57,17 @@ const GestureUI = () => {
           const pose = getCurrentPositions();
           if (matchPosition(pose, predicate)) {
             setResponse("🙆");
-            setStep(cur => (cur + 1) % gestures.length);
+            if (step + 1 < gestures.length - 1) {
+              setStep(cur => (cur + 1) % gestures.length);
+            } else {
+              onNext(); // completed this gesture part
+            }
           } else {
             setResponse("🙅");
           }
         }
       }),
-    [predicate, setResponse]
+    [predicate, setResponse, onNext]
   );
 
   return (
