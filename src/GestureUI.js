@@ -41,7 +41,13 @@ const gestures = [
     type: "gif",
     url: "https://i.imgur.com/HELVWiM.gif",
     caption: "Cuddle on the floor and bury your face",
-    predicate: facepalm
+    predicate: cuddling
+  },
+  {
+    type: "gif",
+    url: "https://i.imgur.com/6hcqc5a.gif",
+    caption: "Try hard to stand still",
+    predicate: () => true
   }
 ];
 
