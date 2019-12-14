@@ -17,7 +17,16 @@ const JoyConController = () => {
       window.removeEventListener("gamepaddisconnected", gamepadDisconnect);
     };
   }, []);
-  const [pos, setPos] = React.useState({});
+  let [pos, setPos] = React.useState({});
+  const [filter, setFilter] = React.useState(
+    "rightEye rightWrist leftEye leftWrist"
+  );
+  let filteredPos = {};
+  if (filter && filter.split) {
+    filter.split(" ").forEach(field => (filteredPos[field] = pos[field]));
+  } else {
+    filteredPos = pos;
+  }
   React.useEffect(() => {
     const id = setInterval(() => {
       setPos(getCurrentPositions());
@@ -47,8 +56,13 @@ const JoyConController = () => {
           }}
         ></canvas>
       </div>
+      <input
+        type="text"
+        value={filter}
+        onChange={e => setFilter(e.target.value)}
+      />
       <pre style={{ fontSize: "small", textAlign: "left" }}>
-        {JSON.stringify(pos, null, 2)}
+        {JSON.stringify(filteredPos, null, 2)}
       </pre>
     </div>
   );

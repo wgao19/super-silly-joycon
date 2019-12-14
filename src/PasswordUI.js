@@ -50,7 +50,7 @@ const PasswordUI = () => {
         setValue(`${value}${char}`);
       }
     });
-  }, []);
+  }, [value]);
 
   const processed = requirements.map(r => {
     return { ...r, result: r.test(value) };

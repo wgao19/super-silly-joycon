@@ -3,13 +3,12 @@
 export let videoHeight = (window.innerHeight / 3) * 2;
 export let videoWidth = (window.innerWidth / 3) * 2;
 export let currentPositions = {};
-
+let colorLeft = "red";
+let colorRight = "green";
 export function getCurrentPositions() {
   return currentPositions;
 }
 (async function lskdj() {
-  let colorLeft = "red";
-  let colorRight = "green";
   // We create an object with the parameters that we want for the model.
   const poseNetState = {
     algorithm: "single-pose",
@@ -116,27 +115,27 @@ export function getCurrentPositions() {
 
     poseDetectionFrame();
   }
-  function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
-    currentPositions = {};
-    keypoints.forEach(kp => (currentPositions[kp.part] = kp));
-    let leftWrist = currentPositions.leftWrist;
-    let rightWrist = currentPositions.rightWrist;
-
-    if (leftWrist.score > minConfidence) {
-      const { y, x } = leftWrist.position;
-      drawPoint(ctx, y * scale, x * scale, 20, colorLeft);
-    }
-
-    if (rightWrist.score > minConfidence) {
-      const { y, x } = rightWrist.position;
-      drawPoint(ctx, y * scale, x * scale, 20, colorRight);
-    }
-  }
-
-  function drawPoint(ctx, y, x, r, color) {
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, 2 * Math.PI);
-    ctx.fillStyle = color;
-    ctx.fill();
-  }
 })();
+
+function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  currentPositions = {};
+  keypoints.forEach(kp => (currentPositions[kp.part] = kp));
+  let leftWrist = currentPositions.leftWrist;
+  let rightWrist = currentPositions.rightWrist;
+
+  if (leftWrist.score > minConfidence) {
+    const { y, x } = leftWrist.position;
+    drawPoint(ctx, y * scale, x * scale, 20, colorLeft);
+  }
+
+  if (rightWrist.score > minConfidence) {
+    const { y, x } = rightWrist.position;
+    drawPoint(ctx, y * scale, x * scale, 20, colorRight);
+  }
+}
+function drawPoint(ctx, y, x, r, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
