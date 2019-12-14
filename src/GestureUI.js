@@ -2,7 +2,13 @@ import * as React from "react";
 
 import { subscribe } from "./eventBus";
 import { getCurrentPositions } from "./posenet";
-import { matchPosition, poseToChar, cuddling, raisedRightHand } from "./utils";
+import {
+  matchPosition,
+  poseToChar,
+  cuddling,
+  raisedRightHand,
+  lotusPosition
+} from "./utils";
 
 const gestures = [
   {
@@ -22,11 +28,17 @@ const gestures = [
     url: "https://i.imgur.com/HELVWiM.gif",
     caption: "Cuddle on the floor",
     predicate: cuddling
+  },
+  {
+    type: "emoji",
+    label: "🧘🏾‍♂️",
+    caption: "Meditate on the meaning of life",
+    predicate: lotusPosition
   }
 ];
 
 const GestureUI = () => {
-  const [step, setStep] = React.useState(0);
+  const [step, setStep] = React.useState(3);
   const [response, setResponse] = React.useState("");
 
   const { type, label, caption, url, predicate } = gestures[step];
