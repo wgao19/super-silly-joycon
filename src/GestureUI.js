@@ -4,10 +4,6 @@ import { subscribe } from "./eventBus";
 import { getCurrentPositions } from "./posenet";
 import { matchPosition, poseToChar, cuddling } from "./utils";
 
-const moveToNextStep = () => {
-  setStep(cur => (cur + 1) % gestures.length);
-};
-
 const gestures = [
   {
     type: "emoji",
@@ -41,7 +37,7 @@ const GestureUI = () => {
           const pose = getCurrentPositions();
           if (matchPosition(pose, predicate)) {
             setResponse("🙆");
-            moveToNextStep();
+            setStep(cur => (cur + 1) % gestures.length);
           } else {
             setResponse("🙅");
           }
