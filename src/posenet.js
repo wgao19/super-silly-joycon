@@ -144,6 +144,8 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   drawFace("nose");
   drawFace("leftShoulder");
   drawFace("rightShoulder");
+  drawFace("leftKnee");
+  drawFace("rightKnee");
   function drawFace(str) {
     let pos = newPosition[str].position;
     drawPoint(ctx, pos.y * scale, pos.x * scale, 10, "cyan");

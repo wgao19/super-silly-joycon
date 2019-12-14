@@ -9,11 +9,11 @@ export const poseToChar = positions => {
   return "🙅";
 };
 
-const bodyPartsAreClose = (a, b) => {
+const bodyPartsAreClose = (a, b, distance = 10) => {
   const diffX = Math.abs(a.position.x - b.position.x);
   const diffY = Math.abs(a.position.y - b.position.y);
-
-  return diffX < 10 && diffY < 10;
+  console.log({ diffX, diffY, a, b });
+  return diffX < distance && diffY < distance;
 };
 
 export const matchPosition = (positions, predicate) => predicate(positions);
@@ -35,3 +35,7 @@ export const facepalm = ([positions]) => {
 
   return diffX < 150 && diffY < 150;
 };
+
+export const lotusPosition = ([positions]) =>
+  bodyPartsAreClose(positions.leftWrist, positions.leftKnee, 100) &&
+  bodyPartsAreClose(positions.rightWrist, positions.rightKnee, 100);
