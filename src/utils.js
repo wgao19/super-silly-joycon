@@ -24,10 +24,10 @@ const bodyPartsAreClose = (a, b, distance = 10) => {
 export const matchPosition = (positions, predicate) => predicate(positions);
 
 export const cuddling = ([positions]) =>
-  bodyPartsAreClose(positions.leftWrist, positions.rightWrist) &&
-  bodyPartsAreClose(positions.leftKnee, positions.rightKnee) &&
-  bodyPartsAreClose(positions.leftWrist, positions.leftKnee) &&
-  bodyPartsAreClose(positions.rightWrist, positions.rightKnee);
+  bodyPartsAreClose(positions.leftWrist, positions.rightWrist, 100) &&
+  bodyPartsAreClose(positions.leftKnee, positions.rightKnee, 100) &&
+  bodyPartsAreClose(positions.leftWrist, positions.leftKnee, 100) &&
+  bodyPartsAreClose(positions.rightWrist, positions.rightKnee, 100);
 
 export const raisedRightHand = ([positions]) =>
   positions.rightWrist.position.y < positions.rightShoulder.position.y;
