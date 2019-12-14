@@ -1,15 +1,15 @@
 // https://dev.to/devdevcharlie/playing-beat-saber-in-the-browser-with-body-movements-using-posenet-tensorflow-js-36km
 
-let videoHeight = (window.innerHeight / 3) * 2;
-let videoWidth = (window.innerWidth / 3) * 2;
+export let videoHeight = (window.innerHeight / 3) * 2;
+export let videoWidth = (window.innerWidth / 3) * 2;
 (async function lskdj() {
-  let colorLeft = 'red';
-  let colorRight = 'green';
+  let colorLeft = "red";
+  let colorRight = "green";
   // We create an object with the parameters that we want for the model.
   const poseNetState = {
-    algorithm: 'single-pose',
+    algorithm: "single-pose",
     input: {
-      architecture: 'MobileNetV1',
+      architecture: "MobileNetV1",
       outputStride: 16,
       inputResolution: 513,
       multiplier: 0.75,
@@ -39,16 +39,16 @@ let videoWidth = (window.innerWidth / 3) * 2;
   try {
     video = await setupCamera();
     video.play();
-    const { width, height } = videoDimensions(video);
-    videoHeight = height;
-    videoWidth = width;
+    // const { width, height } = videoDimensions(video);
+    // videoHeight = height;
+    // videoWidth = width;
     detectPoseInRealTime(video);
   } catch (e) {
     throw e;
   }
 
   async function setupCamera() {
-    const video = document.getElementById('video');
+    const video = document.getElementById("video");
     video.width = videoWidth;
     video.height = videoHeight;
 
@@ -61,14 +61,14 @@ let videoWidth = (window.innerWidth / 3) * 2;
     });
     video.srcObject = stream;
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       video.onloadedmetadata = () => resolve(video);
     });
   }
 
   function detectPoseInRealTime(video) {
-    const canvas = document.getElementById('output');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById("output");
+    const ctx = canvas.getContext("2d");
     const flipPoseHorizontal = true;
 
     canvas.width = videoWidth;
@@ -80,10 +80,10 @@ let videoWidth = (window.innerWidth / 3) * 2;
       let minPartConfidence;
 
       switch (poseNetState.algorithm) {
-        case 'single-pose':
+        case "single-pose":
           const pose = await poseNetModel.estimatePoses(video, {
             flipHorizontal: flipPoseHorizontal,
-            decodingMethod: 'single-person'
+            decodingMethod: "single-person"
           });
           poses = poses.concat(pose);
           minPoseConfidence = +poseNetState.singlePoseDetection
@@ -116,8 +116,8 @@ let videoWidth = (window.innerWidth / 3) * 2;
   }
 
   function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
-    let leftWrist = keypoints.find((point) => point.part === 'leftWrist');
-    let rightWrist = keypoints.find((point) => point.part === 'rightWrist');
+    let leftWrist = keypoints.find(point => point.part === "leftWrist");
+    let rightWrist = keypoints.find(point => point.part === "rightWrist");
 
     if (leftWrist.score > minConfidence) {
       const { y, x } = leftWrist.position;
