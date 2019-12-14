@@ -88,6 +88,11 @@ body {
   border-radius: 2px;
   border: 1px solid #222;
   margin-bottom: 0.5em;
+  position: fixed;
+  bottom: 16px;
+  left: 16px;;
+  right: 16px;
+  background: white;
 }
 
 .container {

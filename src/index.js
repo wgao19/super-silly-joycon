@@ -27,11 +27,11 @@ const JoyConController = () => {
 
   return (
     <div>
-      {/*<div className="display" id="gamepad-display" />
-      <div className="display" id="button-x-display" />*/}
-      {stage === 0 && <Welcome onDone={onStage0Done} />}
+      {/*<div className="display" id="button-x-display" />*/}
+      {stage === 0 && <Welcome onNext={onStage0Done} />}
       {stage === 1 && <PasswordUI />}
       {stage > 0 && <Pose />}
+      <div className="display" id="gamepad-display" />
     </div>
   );
 };
