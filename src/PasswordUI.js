@@ -23,31 +23,41 @@ const PasswordUI = () => {
     return { ...r, result: r.test(value) };
   });
   return (
-    <form>
-      <div className="input-wrapper">
-        <input
-          className="input"
-          onChange={event => setValue(event.currentTarget.value)}
-          type={showPassword ? "text" : "password"}
-          value={value}
-        />
+    <div className="password-container">
+      <form>
+        <div className="input-wrapper">
+          <input
+            className="input"
+            onChange={event => setValue(event.currentTarget.value)}
+            type={showPassword ? "text" : "password"}
+            value={value}
+          />
+          <button
+            className="show-password"
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+            type="button"
+          >
+            {showPassword ? "🙈" : "👀"}
+          </button>
+        </div>
         <button
-          className="show-password"
-          onClick={() => {
-            setShowPassword(!showPassword);
-          }}
-          type="button"
+          className="hit-me"
+          disabled={processed.filter(r => r.result === false).length > 0}
         >
-          {showPassword ? "🙈" : "👀"}
+          Hit me up
         </button>
+      </form>
+      <div className="am-i-wrong">
+        {processed.map((p, index) => (
+          <p key={index}>
+            <span className="requirement-icon">{p.result ? "✅" : "❌"}</span>
+            {p.name}
+          </p>
+        ))}
       </div>
-      {processed.map((p, index) => (
-        <p key={index}>
-          {p.result ? "✅" : "❌"}
-          {p.name}
-        </p>
-      ))}
-    </form>
+    </div>
   );
 };
 
