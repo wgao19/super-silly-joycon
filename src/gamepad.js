@@ -1,9 +1,9 @@
-// const buttonPressed = key => {
-//   if (typeof key === "object") {
-//     return key.pressed;
-//   }
-//   return false;
-// };
+const buttonPressed = key => {
+  if (typeof key === "object") {
+    return key.pressed;
+  }
+  return false;
+};
 
 let start,
   connectedGamepads = [];
@@ -17,6 +17,13 @@ const buttonX = {
 const THRESHOLD = 300;
 
 const update = gamepad => {
+  // test button pressed
+  const buttonDisplays = document.getElementsByClassName("button-display");
+  for (let i = 0; i < buttonDisplays.length; i++) {
+    buttonDisplays[
+      i
+    ].innerHTML = `pressed button ${i}: ${gamepad.buttons[i].pressed}`;
+  }
   const pressedX = gamepad.buttons[1].pressed;
   const currentState = buttonX.state;
   if (pressedX) {
@@ -77,9 +84,7 @@ const renderConnectedGamepadInfo = () => {
   document.getElementById("gamepad-display").innerHTML = connectedGamepads
     .map(
       gp =>
-        `Gamepad connected at index ${gp.index}: ${gp.id}. ${
-          gp.buttons.length
-        } buttons, ${gp.axes.length} axes.`
+        `Gamepad connected at index ${gp.index}: ${gp.id}. ${gp.buttons.length} buttons, ${gp.axes.length} axes.`
     )
     .join("<br />");
 };
