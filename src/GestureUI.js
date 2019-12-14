@@ -7,9 +7,9 @@ import {
   poseToChar,
   cuddling,
   facepalm,
-  lotusPosition
+  lotusPosition,
   raisedRightHand,
-  shrugging,
+  shrugging
 } from "./utils";
 
 const gestures = [
@@ -32,16 +32,16 @@ const gestures = [
     predicate: facepalm
   },
   {
-    type: "gif",
-    url: "https://i.imgur.com/HELVWiM.gif",
-    caption: "Cuddle on the floor",
-    predicate: cuddling
-  },
-  {
     type: "emoji",
     label: "🧘🏾‍♂️",
     caption: "Meditate on the meaning of life",
     predicate: lotusPosition
+  },
+  {
+    type: "gif",
+    url: "https://i.imgur.com/HELVWiM.gif",
+    caption: "Cuddle on the floor",
+    predicate: cuddling
   }
 ];
 
