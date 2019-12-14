@@ -44,6 +44,11 @@ const Pose = () => {
           }}
         ></canvas>
       </div>
+      <input
+        type="text"
+        value={filter}
+        onChange={evt => setFilter(evt.target.value)}
+      />
       <pre style={{ fontSize: "small", textAlign: "left" }}>
         {JSON.stringify(filteredPos, null, 2)}
       </pre>

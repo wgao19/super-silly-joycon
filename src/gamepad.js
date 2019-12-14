@@ -82,6 +82,7 @@ const update = (gamepad, buttonObservers) => {
         }
       }
     }
+    return null;
   });
 };
 
@@ -94,14 +95,14 @@ const gameLoop = () => {
   requestAnimationFrame(gameLoop);
 };
 
-const renderConnectedGamepadInfo = () => {
-  document.getElementById("gamepad-display").innerHTML = connectedGamepads
-    .map(
-      ({ gamepad: gp }) =>
-        `Gamepad connected at index ${gp.index}: ${gp.id}. ${gp.buttons.length} buttons, ${gp.axes.length} axes.`
-    )
-    .join("<br />");
-};
+// const renderConnectedGamepadInfo = () => {
+//   document.getElementById("gamepad-display").innerHTML = connectedGamepads
+//     .map(
+//       ({ gamepad: gp }) =>
+//         `Gamepad connected at index ${gp.index}: ${gp.id}. ${gp.buttons.length} buttons, ${gp.axes.length} axes.`
+//     )
+//     .join("<br />");
+// };
 export const gamepadConnect = evt => {
   console.log(
     "Gamepad connected at index %d: %s. %d buttons, %d axes.",

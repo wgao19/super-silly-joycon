@@ -4,7 +4,7 @@ import { subscribe } from "./eventBus";
 import { getCurrentPositions } from "./posenet";
 import {
   matchPosition,
-  poseToChar,
+  // poseToChar,
   cuddling,
   facepalm,
   lotusPosition,
@@ -74,7 +74,7 @@ const GestureUI = ({ onNext }) => {
           }
         }
       }),
-    [predicate, setResponse, onNext]
+    [predicate, setResponse, onNext, step]
   );
 
   return (
@@ -82,7 +82,7 @@ const GestureUI = ({ onNext }) => {
       {type === "emoji" ? (
         <span style={{ fontSize: "64px" }}>{label}</span>
       ) : (
-        <img src={url} />
+        <img alt="hex" src={url} />
       )}
       <h2>{caption}</h2>
       <h2>{response}</h2>

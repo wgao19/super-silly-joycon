@@ -12,7 +12,7 @@ const Welcome = ({ onNext }) => {
           onNext();
         }
       }),
-    []
+    [onNext]
   );
   useEffect(
     () =>
@@ -21,7 +21,7 @@ const Welcome = ({ onNext }) => {
           onNext();
         }
       }),
-    []
+    [onNext]
   );
   useEffect(() => {
     document.body.style =

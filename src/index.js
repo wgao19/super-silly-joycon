@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { gamepadConnect, gamepadDisconnect } from "./gamepad";
-import PasswordUI from "./PasswordUI";
+// import PasswordUI from "./PasswordUI";
 import GestureUI from "./GestureUI";
 import EndUI from "./EndUI";
 import Pose from "./Pose";
@@ -48,7 +48,7 @@ const JoyConController = () => {
       }
     }, 1000);
     return () => clearInterval(id);
-  }, [startLiao, winLiao]);
+  }, [startLiao, winLiao, time]);
 
   return (
     <div>
