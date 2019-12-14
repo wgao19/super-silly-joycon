@@ -15,3 +15,9 @@ const bodyPartsAreClose = (a, b) => {
 
   return diffX < 10 && diffY < 10;
 };
+
+export const matchPosition = (positions, predicate) => predicate(positions);
+
+export const cuddling = ([positions]) =>
+  bodyPartsAreClose(positions.leftWrist, positions.rightWrist) &&
+  positions.leftWrist.position.y < 250;
