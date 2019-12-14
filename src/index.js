@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { gamepadConnect, gamepadDisconnect } from "./gamepad";
 // import NintendoUI from "./NintendoUI";
+import PasswordUI from "./PasswordUI";
 
 import "./styles.css";
 
@@ -21,6 +22,7 @@ const JoyConController = () => {
       {/* <NintendoUI /> */}
       <div className="display" id="gamepad-display" />
       <div className="display" id="button-x-display" />
+      <PasswordUI />
     </div>
   );
 };
