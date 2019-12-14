@@ -43,7 +43,6 @@ const PasswordUI = () => {
       }
     });
     subscribe("y", payload => {
-      console.log(payload);
       if (payload === "pressed") {
         const pose = getCurrentPositions();
         const char = poseToChar(pose);
