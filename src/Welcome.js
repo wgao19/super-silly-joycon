@@ -23,6 +23,11 @@ const Welcome = ({ onNext }) => {
       }),
     []
   );
+  useEffect(() => {
+    document.body.style =
+      "height: 100vh; background-image: linear-gradient(black, black), url(https://image.businessinsider.com/544a96b0eab8ea8945608ad2?width=600&format=jpeg&auto=webp); background-size: cover; background-blend-mode: saturation;";
+    return () => (document.body.style = undefined);
+  });
   return (
     <div className="welcome-container">
       <h1>Welcome Legendary Hacker</h1>
