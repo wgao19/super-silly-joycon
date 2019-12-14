@@ -120,7 +120,7 @@ async function lskdj() {
 
     poseDetectionFrame();
   }
-})();
+}
 
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   let newPosition = {};
