@@ -10,6 +10,16 @@ const requirements = [
 
       return true;
     }
+  },
+  {
+    name: "Must have a number",
+    test: password => {
+      if (password.split("").some(x => "0123456789".split("").includes(x))) {
+        return true;
+      }
+
+      return false;
+    }
   }
 ];
 
