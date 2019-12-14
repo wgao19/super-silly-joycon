@@ -43,15 +43,6 @@ const JoyConController = () => {
           }}
         ></canvas>
       </div>
-
-      <div id='angularAcceleration' />
-      <div id='angularVelocity' />
-      <div id='hasOrientation' />
-      <div id='hasPosition' />
-      <div id='linearAcceleration' />
-      <div id='linearVelocity' />
-      <div id='orientation' />
-      <div id='position' />
     </div>
   );
 };

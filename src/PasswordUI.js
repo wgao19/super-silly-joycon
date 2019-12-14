@@ -12,30 +12,52 @@ const requirements = [
   },
   {
     name: "Put up both your hands",
-    test: password => password.split("").includes("🙌")
+    test: password => [...password].includes("🙌")
   }
 ];
 
 const PasswordUI = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [value, setValue] = useState("");
   const processed = requirements.map(r => {
     return { ...r, result: r.test(value) };
   });
   return (
-    <form>
-      <input
-        className="password-input"
-        onChange={event => setValue(event.currentTarget.value)}
-        type="text"
-        value={value}
-      />
-      {processed.map((p, index) => (
-        <p key={index}>
-          {p.result ? "✅" : "❌"}
-          {p.name}
-        </p>
-      ))}
-    </form>
+    <div className="password-container">
+      <form>
+        <div className="input-wrapper">
+          <input
+            className="input"
+            onChange={event => setValue(event.currentTarget.value)}
+            type={showPassword ? "text" : "password"}
+            value={value}
+          />
+          <button
+            className="show-password"
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+            type="button"
+          >
+            {showPassword ? "🙈" : "👀"}
+          </button>
+        </div>
+        <button
+          className="hit-me"
+          disabled={processed.filter(r => r.result === false).length > 0}
+        >
+          Hit me up
+        </button>
+      </form>
+      <div className="am-i-wrong">
+        {processed.map((p, index) => (
+          <p key={index}>
+            <span className="requirement-icon">{p.result ? "✅" : "❌"}</span>
+            {p.name}
+          </p>
+        ))}
+      </div>
+    </div>
   );
 };
 
