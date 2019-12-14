@@ -90,7 +90,7 @@ body {
   margin-bottom: 0.5em;
   position: fixed;
   bottom: 16px;
-  left: 16px;;
+  left: 16px;
   right: 16px;
   background: white;
 }
@@ -307,31 +307,41 @@ Password UI
   font-size: 24px;
 }
 
- .am-i-wrong {
-   text-align: left;
- }
+.am-i-wrong {
+  text-align: left;
+}
 
- .requirement-icon {
-   margin-right: 8px;
- }
+.requirement-icon {
+  margin-right: 8px;
+}
 
- .hit-me {
-   width: 100%;
-   background: #333;
-   color: white;
-   font-size: 18px;
-   border-radius: 4px;
-   border: none;
-   margin-top: 16px;
-   padding: 8px 16px;
-   cursor: pointer;
- }
+.hit-me {
+  width: 100%;
+  background: #333;
+  color: white;
+  font-size: 18px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 16px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
 
- .hit-me:disabled {
-   opacity: 0.5;
-   cursor: not-allowed;
- }
+.hit-me:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
- .hit-me:not(:disabled):hover {
-   transform: translate(2px, 2px);
- }
+.hit-me:not(:disabled):hover {
+  transform: translate(2px, 2px);
+}
+
+#loadingVideo {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

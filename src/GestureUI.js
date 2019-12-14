@@ -46,7 +46,7 @@ const gestures = [
 ];
 
 const GestureUI = () => {
-  const [step, setStep] = React.useState(3);
+  const [step, setStep] = React.useState(0);
   const [response, setResponse] = React.useState("");
 
   const { type, label, caption, url, predicate } = gestures[step];
