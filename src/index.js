@@ -17,16 +17,20 @@ const JoyConController = () => {
       window.removeEventListener("gamepaddisconnected", gamepadDisconnect);
     };
   }, []);
-  let [pos, setPos] = React.useState({});
+  let [pos, setPos] = React.useState([]);
   const [filter, setFilter] = React.useState(
     "rightEye rightWrist leftEye leftWrist"
   );
-  let filteredPos = {};
-  if (filter && filter.split) {
-    filter.split(" ").forEach(field => (filteredPos[field] = pos[field]));
-  } else {
-    filteredPos = pos;
-  }
+  let filteredPos = [];
+  pos.forEach(_pos => {
+    let newFilteredPos = {};
+    if (filter && filter.split) {
+      filter.split(" ").forEach(field => (newFilteredPos[field] = _pos[field]));
+    } else {
+      newFilteredPos = pos;
+    }
+    filteredPos.push(newFilteredPos);
+  });
   React.useEffect(() => {
     const id = setInterval(() => {
       setPos(getCurrentPositions());

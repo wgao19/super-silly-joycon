@@ -2,7 +2,8 @@
 
 export let videoHeight = (window.innerHeight / 3) * 2;
 export let videoWidth = (window.innerWidth / 3) * 2;
-export let currentPositions = {};
+export let currentPositions = [];
+let nextPositions = [];
 let colorLeft = "red";
 let colorRight = "green";
 export function getCurrentPositions() {
@@ -80,19 +81,17 @@ export function getCurrentPositions() {
       let minPoseConfidence;
       let minPartConfidence;
 
-      switch (poseNetState.algorithm) {
-        case "single-pose":
-          const pose = await poseNetModel.estimatePoses(video, {
-            flipHorizontal: flipPoseHorizontal,
-            decodingMethod: "single-person"
-          });
-          poses = poses.concat(pose);
-          minPoseConfidence = +poseNetState.singlePoseDetection
-            .minPoseConfidence;
-          minPartConfidence = +poseNetState.singlePoseDetection
-            .minPartConfidence;
-          break;
-      }
+      const pose = await poseNetModel.estimatePoses(video, {
+        flipHorizontal: flipPoseHorizontal,
+        // decodingMethod: "single-person"
+        decodingMethod: "multi-person"
+        // maxDetections: guiState.multiPoseDetection.maxPoseDetections,
+        // scoreThreshold: guiState.multiPoseDetection.minPartConfidence,
+        // nmsRadius: guiState.multiPoseDetection.nmsRadius
+      });
+      poses = poses.concat(pose);
+      minPoseConfidence = +poseNetState.singlePoseDetection.minPoseConfidence;
+      minPartConfidence = +poseNetState.singlePoseDetection.minPartConfidence;
 
       ctx.clearRect(0, 0, videoWidth, videoHeight);
 
@@ -102,7 +101,6 @@ export function getCurrentPositions() {
         ctx.translate(-videoWidth, 0);
         ctx.restore();
       }
-
       poses.forEach(({ score, keypoints }) => {
         if (score >= minPoseConfidence) {
           if (poseNetState.output.showPoints) {
@@ -110,6 +108,7 @@ export function getCurrentPositions() {
           }
         }
       });
+      currentPositions = nextPositions; // atomic swap
       requestAnimationFrame(poseDetectionFrame);
     }
 
@@ -118,21 +117,32 @@ export function getCurrentPositions() {
 })();
 
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
-  currentPositions = {};
-  keypoints.forEach(kp => (currentPositions[kp.part] = kp));
-  let leftWrist = currentPositions.leftWrist;
-  let rightWrist = currentPositions.rightWrist;
+  let newPosition = {};
+  keypoints.forEach(kp => (newPosition[kp.part] = kp));
+  nextPositions.push(newPosition); // queue it up for next round
+  let leftWrist = newPosition.leftWrist;
+  let rightWrist = newPosition.rightWrist;
 
-  if (leftWrist.score > minConfidence) {
+  if (leftWrist.score > minConfidence / 2) {
     const { y, x } = leftWrist.position;
     drawPoint(ctx, y * scale, x * scale, 20, colorLeft);
   }
 
-  if (rightWrist.score > minConfidence) {
+  if (rightWrist.score > minConfidence / 2) {
     const { y, x } = rightWrist.position;
     drawPoint(ctx, y * scale, x * scale, 20, colorRight);
   }
+  drawFace("leftEye");
+  drawFace("rightEye");
+  drawFace("nose");
+  drawFace("leftShoulder");
+  drawFace("rightShoulder");
+  function drawFace(str) {
+    let pos = newPosition[str].position;
+    drawPoint(ctx, pos.y * scale, pos.x * scale, 20, "cyan");
+  }
 }
+
 function drawPoint(ctx, y, x, r, color) {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, 2 * Math.PI);
