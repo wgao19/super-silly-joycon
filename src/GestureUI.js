@@ -2,14 +2,14 @@ import * as React from "react";
 
 import { subscribe } from "./eventBus";
 import { getCurrentPositions } from "./posenet";
-import { matchPosition, poseToChar, cuddling } from "./utils";
+import { matchPosition, poseToChar, cuddling, raisedRightHand } from "./utils";
 
 const gestures = [
   {
     type: "emoji",
     label: "🙋🏻‍♀️",
     caption: "Raise your right hand",
-    predicate: cuddling
+    predicate: raisedRightHand
   },
   {
     type: "emoji",
