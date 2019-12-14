@@ -26,6 +26,7 @@ const Pose = () => {
   return (
     <>
       <div style={{ position: "relative" }}>
+        <h1 id="loadingVideo">Loading video...</h1>
         <video
           id="video"
           playsInline

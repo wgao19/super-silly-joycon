@@ -56,6 +56,7 @@ async function lskdj() {
 
   async function setupCamera() {
     const video = document.getElementById("video");
+    const loadingVideo = document.getElementById("loadingVideo");
     video.width = videoWidth;
     video.height = videoHeight;
 
@@ -69,7 +70,10 @@ async function lskdj() {
     video.srcObject = stream;
 
     return new Promise(resolve => {
-      video.onloadedmetadata = () => resolve(video);
+      video.onloadeddata = () => {
+        loadingVideo.remove();
+        resolve(video);
+      };
     });
   }
 
