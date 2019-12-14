@@ -27,6 +27,9 @@ export const cuddling = ([positions]) =>
 export const raisedRightHand = ([positions]) =>
   positions.rightWrist.position.y < positions.rightShoulder.position.y;
 
+export const facepalm = ([positions]) =>
+  bodyPartsAreClose(positions.rightWrist, positions.rightEye, 150);
+
 export const shrugging = ([positions]) =>
   beneath(positions.rightElbow.position, positions.rightShoulder.position) &&
   beneath(positions.rightShoulder.position, positions.rightWrist.position) &&

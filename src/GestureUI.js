@@ -6,9 +6,10 @@ import {
   matchPosition,
   poseToChar,
   cuddling,
+  facepalm,
+  lotusPosition
   raisedRightHand,
   shrugging,
-  lotusPosition
 } from "./utils";
 
 const gestures = [
@@ -23,6 +24,12 @@ const gestures = [
     label: "🤷🏻‍♀️",
     caption: "Show your attitude ¯\\_(ツ)_/¯",
     predicate: shrugging
+  },
+  {
+    type: "emoji",
+    label: "🤦‍♀️",
+    caption: "Face + palm = BFFs",
+    predicate: facepalm
   },
   {
     type: "gif",
